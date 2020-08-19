@@ -17,5 +17,10 @@ from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
+    path('home/', ),
+    path('new/', ),
+    path('roasts/', ),
+    path('boasts/', ),
+    path('popular/', ),
     path('admin/', admin.site.urls),
 ]

@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from ghostpost_app.views import new_post_view, home_view, boasts_view, roasts_view, popular_view
+from ghostpost_app.views import new_post_view, home_view, \
+    boasts_view, roasts_view, popular_view, upvote, downvote
 
 urlpatterns = [
     path('', home_view, name="homepage"),
@@ -23,5 +24,7 @@ urlpatterns = [
     path('roasts/', roasts_view, name='roasts'),
     path('boasts/', boasts_view, name='boasts'),
     path('popular/', popular_view, name="popular"),
+    path('upvote/<int:post_id>', upvote),
+    path('downvote/<int:post_id>', downvote),
     path('admin/', admin.site.urls),
 ]

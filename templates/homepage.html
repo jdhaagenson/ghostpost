@@ -22,8 +22,9 @@
                 <h4>{{ post.is_boast }}</h4>
                 <a href="/upvote/{{ post.id }}"><button>👍 Upvote</button></a>
                 <a href="/downvote/{{ post.id }}"><button>👎 Downvote</button></a>
-                <h2>{% post.upvotes - post.downvotes %}</h2>
+                <h2>{{ post.score }}</h2>
                 <p>{{ post.date }}</p>
+                <hr/>
             </div>
         {% endfor %}
     </div>

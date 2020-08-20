@@ -3,6 +3,7 @@ from ghostpost_app.models import Post
 from ghostpost_app.forms import NewPostForm
 from datetime import datetime
 from django.http import HttpResponseRedirect
+from django.db.models import F
 
 
 # Create your views here.
@@ -13,7 +14,8 @@ def home_view(request):
 
 def popular_view(request):
     posts = Post.objects.all()
-    posts.order_by('-upvotes', 'downvotes')
+    # score = 0
+    posts = sorted(posts, key=lambda p: p.score, reverse=True)
     return render(request, 'homepage.html', {'posts': posts})
 
 
@@ -33,12 +35,12 @@ def new_post_view(request):
 
 
 def boasts_view(request):
-    posts = Post.objects.filter(is_boast=True)
+    posts = Post.objects.filter(is_boast=True).order_by('-date')
     return render(request, 'homepage.html', {'posts': posts})
 
 
 def roasts_view(request):
-    posts = Post.objects.filter(is_boast=False)
+    posts = Post.objects.filter(is_boast=False).order_by('-date')
     return render(request, 'homepage.html', {'posts': posts})
 
 
@@ -54,3 +56,6 @@ def downvote(request, post_id):
     post.downvotes += 1
     post.save()
     return HttpResponseRedirect(reverse('homepage'))
+
+
+# extra credit:

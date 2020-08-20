@@ -1,4 +1,4 @@
-import datetime
+from django.utils import timezone
 from django.db import models
 
 
@@ -9,14 +9,17 @@ class Post(models.Model):
     content = models.CharField(max_length=250)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
-    date = models.DateTimeField(default=datetime.datetime.now,
+    date = models.DateTimeField(default=timezone.now,
                                 blank=True,
                                 null=True
                                 )
 
     def __str__(self):
-        return self.content
+        return self.is_boast
 
     @property
     def score(self):
-        return self.upvotes - self.downvotes
+        score = 0
+        score += self.upvotes
+        score -= self.downvotes
+        return score

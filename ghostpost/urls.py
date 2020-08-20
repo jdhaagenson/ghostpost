@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from ghostpost_app.views import new_post_view, home_view, boasts_view, roasts_view, popular_view
 
 urlpatterns = [
-    path('home/', ),
-    path('new/', ),
-    path('roasts/', ),
-    path('boasts/', ),
-    path('popular/', ),
+    path('home/', home_view, name="homepage"),
+    path('new/', new_post_view, name="newpost"),
+    path('roasts/', roasts_view, name='roasts'),
+    path('boasts/', boasts_view, name='boasts'),
+    path('popular/', popular_view, name="popular"),
     path('admin/', admin.site.urls),
 ]

@@ -20,6 +20,10 @@
             <div>
                 <h1>{{ post.content }}</h1>
                 <h4>{{ post.is_boast }}</h4>
+                <button>👍 Upvote</button>
+                <button>👎 Downvote</button>
+                <h2>{{ post.upvotes-post.downvotes }}</h2>
+                <p>{{ post.date }}</p>
             </div>
         {% endfor %}
     </div>

@@ -1,5 +1,7 @@
 from django.utils import timezone
 from django.db import models
+from django.utils.crypto import get_random_string
+import string
 
 
 # Create your models here.
@@ -13,13 +15,12 @@ class Post(models.Model):
                                 blank=True,
                                 null=True
                                 )
+    secret = models.CharField(max_length=6,
+                              unique=True)
 
     def __str__(self):
         return self.is_boast
 
     @property
     def score(self):
-        score = 0
-        score += self.upvotes
-        score -= self.downvotes
-        return score
+        return self.upvotes - self.downvotes

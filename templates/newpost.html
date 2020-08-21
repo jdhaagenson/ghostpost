@@ -8,10 +8,10 @@
 </head>
 
 <body>
-    <form action="" method="post">
+    <form action="/post/{{ post.secret }}" method="post">
         {% csrf_token %}
         {{ form }}
-        <input type="submit" value="Post">
+        <input type="submit" value="Post"/>
     </form>
 </body>
 

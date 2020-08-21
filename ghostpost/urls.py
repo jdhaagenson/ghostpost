@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from ghostpost_app.views import new_post_view, home_view, \
-    boasts_view, roasts_view, popular_view, upvote, downvote
+    boasts_view, roasts_view, popular_view, upvote, downvote, \
+    secret_view, delete, post_details
 
 urlpatterns = [
     path('', home_view, name="homepage"),
@@ -26,5 +27,8 @@ urlpatterns = [
     path('popular/', popular_view, name="popular"),
     path('upvote/<int:post_id>', upvote),
     path('downvote/<int:post_id>', downvote),
+    path('post/<secret>', secret_view, name='secret_view'),
+    path('delete/', delete),
+    path('post/<int:post_id>', post_details, name='post_details'),
     path('admin/', admin.site.urls),
 ]

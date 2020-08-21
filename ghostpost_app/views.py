@@ -28,7 +28,6 @@ def new_post_view(request):
                 content=data.get('content')
             )
             return HttpResponseRedirect(reverse("homepage"))
-            # return HttpResponseRedirect(reverse("secret_view"))
     form = NewPostForm()
     return render(request, 'newpost.html', {'form': form})
 
@@ -47,19 +46,15 @@ def upvote(request, post_id):
     post = Post.objects.get(id=post_id)
     post.upvotes += 1
     post.save()
-    return HttpResponseRedirect(reverse(request.META.get('HTTP_REFERER')))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def downvote(request, post_id):
     post = Post.objects.get(id=post_id)
     post.downvotes += 1
     post.save()
-    return HttpResponseRedirect(reverse(request.META.get('HTTP_REFERER')))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-# extra credit:
-def secret_view(request, post_id):
-    letters = string.ascii_lowercase
-    post = Post.objects.get(post_id)
-    secret = ''.join(random.choice(letters) for i in range(6))
+
 

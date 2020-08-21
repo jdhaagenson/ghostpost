@@ -5,6 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ghostpost</title>
+    <style>
+        .post {
+            margin: 20px;
+        }
+
+
+    </style>
 </head>
 
 <body>
@@ -15,14 +22,20 @@
         <a href="/roasts"><button>Roasts</button></a>
         <a href="/new"><button>New Post</button></a>
     </header>
-    <div>
+    <div class="body">
         {% for post in posts %}
-            <div>
+            <div class="post">
                 <h1>{{ post.content }}</h1>
-                <h4>{{ post.is_boast }}</h4>
+                {% if post.is_boast %}
+                    <h2 style="color: cornflowerblue">Boast</h2>
+                {% else %}
+                    <h2 style="color: crimson">Roast</h2>
+                {% endif %}
+            <div>
                 <a href="/upvote/{{ post.id }}"><button>👍 Upvote</button></a>
                 <a href="/downvote/{{ post.id }}"><button>👎 Downvote</button></a>
-                <h2>{{ post.score }}</h2>
+            </div>
+                <h1>{{ post.score }}</h1>
                 <p>{{ post.date }}</p>
                 <hr/>
             </div>

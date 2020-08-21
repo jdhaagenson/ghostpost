@@ -1,9 +1,8 @@
+import string, random
 from django.shortcuts import render, reverse
 from ghostpost_app.models import Post
 from ghostpost_app.forms import NewPostForm
-from datetime import datetime
 from django.http import HttpResponseRedirect
-from django.db.models import F
 
 
 # Create your views here.
@@ -48,14 +47,19 @@ def upvote(request, post_id):
     post = Post.objects.get(id=post_id)
     post.upvotes += 1
     post.save()
-    return HttpResponseRedirect(reverse('homepage'))
+    return HttpResponseRedirect(reverse(request.META.get('HTTP_REFERER')))
 
 
 def downvote(request, post_id):
     post = Post.objects.get(id=post_id)
     post.downvotes += 1
     post.save()
-    return HttpResponseRedirect(reverse('homepage'))
+    return HttpResponseRedirect(reverse(request.META.get('HTTP_REFERER')))
 
 
 # extra credit:
+def secret_view(request, post_id):
+    letters = string.ascii_lowercase
+    post = Post.objects.get(post_id)
+    secret = ''.join(random.choice(letters) for i in range(6))
+
